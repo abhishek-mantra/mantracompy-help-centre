@@ -39,7 +39,7 @@ export function TableOfContents({ items }: TableOfContentsProps) {
   return (
     <nav
       aria-label="Table of contents"
-      className="space-y-3 p-4 bg-slate-50/70 border border-slate-200/80 rounded-2xl text-xs"
+      className="space-y-3 p-4 bg-white border border-slate-200/90 rounded-2xl text-xs shadow-2xs"
     >
       <div className="flex items-center gap-2 font-bold uppercase tracking-wider text-slate-500 text-[11px] pb-2 border-b border-slate-200/80">
         <List className="size-3.5 text-[#043570]" />

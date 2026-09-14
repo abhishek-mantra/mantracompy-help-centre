@@ -139,7 +139,7 @@ export function ArticleLayout({
             </header>
 
             {/* Article Body */}
-            <article className="article-prose bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 shadow-2xs leading-relaxed">
+            <article className="article-prose bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 shadow-2xs leading-relaxed min-w-0 max-w-full overflow-hidden">
               {children}
             </article>
 

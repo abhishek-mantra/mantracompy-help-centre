@@ -183,29 +183,166 @@
   border-radius: 0 0.5rem 0.5rem 0;
 }
 
+/* Responsive Tables & WordPress Block Content */
+.article-prose figure.wp-block-table,
+.article-prose .table-responsive-wrapper,
+.table-responsive-wrapper {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 1.75rem 0;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04);
+}
+
+/* Ensure any table inside article-prose behaves responsively with readable cell sizing */
 .article-prose table {
   width: 100%;
+  min-width: 650px;
   border-collapse: collapse;
-  margin: 1.5rem 0;
-  font-size: 14px;
+  font-size: 13px;
+  line-height: 1.55;
+  text-align: left;
+  margin: 0;
+}
+
+/* Standalone tables not inside figure or wrapper */
+.article-prose > table {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 1.75rem 0;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
 }
 
 .article-prose th,
 .article-prose td {
   border: 1px solid #e2e8f0;
-  padding: 0.625rem 0.875rem;
+  padding: 0.75rem 1rem;
   text-align: left;
+  vertical-align: middle;
+  min-width: 110px;
+}
+
+.article-prose th:first-child,
+.article-prose td:first-child {
+  min-width: 130px;
 }
 
 .article-prose th {
-  background-color: #f8fafc;
-  font-weight: 600;
+  background-color: #f1f7fc;
+  font-weight: 700;
   color: #043570;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+
+.article-prose tr:nth-child(even) td {
+  background-color: #fbfdff;
 }
 
 .article-prose tr:hover td {
-  background-color: #f8fafc;
+  background-color: #f0f7ff;
 }
+
+/* Responsive Images, Figures, and Embeds */
+.article-prose figure,
+.article-prose figure.wp-block-image {
+  max-width: 100% !important;
+  margin: 1.75rem 0;
+  overflow: hidden;
+}
+
+.article-prose img,
+.article-prose figure img {
+  max-width: 100% !important;
+  height: auto !important;
+  border-radius: 0.75rem;
+  border: 1px solid #e2e8f0;
+  display: block;
+}
+
+/* Responsive Code Blocks */
+.article-prose pre {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  background-color: #0b172a;
+  color: #e2e8f0;
+  padding: 1rem 1.25rem;
+  border-radius: 0.75rem;
+  margin: 1.5rem 0;
+  font-size: 13px;
+}
+
+.article-prose code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.9em;
+  padding: 0.15em 0.4em;
+  border-radius: 0.35rem;
+  background-color: #f1f5f9;
+  color: #043570;
+}
+
+.article-prose pre code {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* Responsive WordPress block buttons */
+.article-prose .wp-block-buttons {
+  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.article-prose .wp-block-button {
+  max-width: 100%;
+}
+
+.article-prose .wp-block-button__link {
+  display: inline-block;
+  max-width: 100%;
+  white-space: normal !important;
+  word-break: break-word;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* FAQ Block Styling */
+.article-prose .schema-faq-section {
+  border-bottom: 1px solid #e2e8f0;
+  padding: 1.25rem 0;
+}
+
+.article-prose .schema-faq-section:last-child {
+  border-bottom: none;
+}
+
+.article-prose .schema-faq-question {
+  display: block;
+  font-size: 1.05rem;
+  color: #043570;
+  margin-bottom: 0.5rem;
+}
+
+.article-prose .schema-faq-answer {
+  color: #475569;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
 
 @media (prefers-reduced-motion: reduce) {
   * {

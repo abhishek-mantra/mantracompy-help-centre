@@ -44,6 +44,25 @@ export function ArticlePage() {
     });
   };
 
+  const processedContent = useMemo(() => {
+    if (!article?.content) return "";
+    let html = article.content;
+
+    // Wrap any standalone table not already wrapped by wp-block-table or table-responsive-wrapper
+    html = html.replace(
+      /(<table[\s\S]*?<\/table>)/gi,
+      (match, _p1, offset, fullStr) => {
+        const before = fullStr.slice(Math.max(0, offset - 60), offset);
+        if (before.includes('class="wp-block-table"') || before.includes("table-responsive-wrapper")) {
+          return match;
+        }
+        return `<div class="table-responsive-wrapper">${match}</div>`;
+      }
+    );
+
+    return html;
+  }, [article?.content]);
+
   const breadcrumbItems = [
     { label: category?.title || article.category, href: `/category/${article.category}` },
     ...(section ? [{ label: section.title, href: `/category/${article.category}` }] : []),
@@ -177,8 +196,8 @@ export function ArticlePage() {
 
             {/* Article Body Prose */}
             <article
-              className="article-prose bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 shadow-2xs leading-relaxed"
-              dangerouslySetInnerHTML={{ __html: article.content }}
+              className="article-prose bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 shadow-2xs leading-relaxed min-w-0 max-w-full overflow-hidden"
+              dangerouslySetInnerHTML={{ __html: processedContent }}
             />
 
             {/* Feedback Widget */}
