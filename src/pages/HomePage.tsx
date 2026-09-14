@@ -63,14 +63,14 @@ export function HomePage() {
 
   // Key promoted guides for daily credentialing operations
   const promotedArticles = [
+    ARTICLE_REGISTRY.find((a) => a.slug === "mantracomply-wizard-walkthrough"),
     ARTICLE_REGISTRY.find((a) => a.slug === "why-npi-is-needed-and-how-to-find-it"),
     ARTICLE_REGISTRY.find((a) => a.slug === "caqh-authorization-and-cvo-access"),
+    ARTICLE_REGISTRY.find((a) => a.slug === "tracking-active-insurance-status"),
     ARTICLE_REGISTRY.find((a) => a.slug === "how-to-fill-out-caqh-in-2026"),
-    ARTICLE_REGISTRY.find((a) => a.slug === "primary-source-verification-and-identity"),
+    ARTICLE_REGISTRY.find((a) => a.slug === "provider-tasks-and-action-items"),
     ARTICLE_REGISTRY.find((a) => a.slug === "state-medical-license-verification"),
     ARTICLE_REGISTRY.find((a) => a.slug === "malpractice-insurance-and-coi-requirements"),
-    ARTICLE_REGISTRY.find((a) => a.slug === "practice-location-and-tax-id-rules"),
-    ARTICLE_REGISTRY.find((a) => a.slug === "choosing-commercial-vs-government-health-plans"),
   ].filter(Boolean);
 
   return (

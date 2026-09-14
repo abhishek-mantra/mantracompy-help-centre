@@ -3,6 +3,12 @@ import { Section } from "../types/helpCenter";
 export const SECTIONS: Section[] = [
   // Getting Started & NPI
   {
+    slug: "platform-tutorials",
+    title: "MantraComply Platform & App Tutorials",
+    category: "getting-started-npi",
+    description: "Step-by-step guides for the 12-step Credentialing Wizard, Tasks, and Active Insurance.",
+  },
+  {
     slug: "npi-requirements",
     title: "NPI & Identifier Fundamentals",
     category: "getting-started-npi",

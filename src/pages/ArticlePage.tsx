@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useParams, Link, Navigate } from "react-router";
+import { marked } from "marked";
 import { getArticleBySlug, getArticlesBySection } from "../data/articleRegistry";
 import { getCategoryBySlug } from "../data/categories";
 import { getSectionBySlug } from "../data/sections";
@@ -17,6 +18,12 @@ import {
   Sparkles,
 } from "lucide-react";
 import { toast } from "sonner";
+
+// Configure marked with GitHub-flavored markdown and line breaks
+marked.setOptions({
+  gfm: true,
+  breaks: true,
+});
 
 export function ArticlePage() {
   const { slug } = useParams<{ slug: string }>();
@@ -46,22 +53,52 @@ export function ArticlePage() {
 
   const processedContent = useMemo(() => {
     if (!article?.content) return "";
-    let html = article.content;
+    let raw = article.content;
 
-    // Wrap any standalone table not already wrapped by wp-block-table or table-responsive-wrapper
+    // 1. Clean legacy WordPress block clutter & dead image links
+    raw = raw
+      .replace(/<p class="wp-block-paragraph">\s*<\/p>/gi, "")
+      .replace(/<p>\s*<\/p>/gi, "")
+      .replace(/<div class="wp-block-buttons[\s\S]*?<\/div>\s*<\/div>/gi, "")
+      .replace(/<figure class="wp-block-image[\s\S]*?<\/figure>/gi, "");
+
+    // 2. Parse Markdown or preserved HTML with marked
+    let html = marked.parse(raw) as string;
+
+    // 3. Ensure headings have id attributes matching TOC items
+    if (article.toc && article.toc.length > 0) {
+      article.toc.forEach((item) => {
+        const escapedText = item.text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const regex = new RegExp(`(<h[2-4][^>]*>)(.*?${escapedText}.*?)(<\\/h[2-4]>)`, "i");
+        html = html.replace(regex, (match, openTag, textContent, closeTag) => {
+          if (openTag.includes("id=")) return match;
+          const tagWithId = openTag.replace(/>$/, ` id="${item.id}">`);
+          return `${tagWithId}${textContent}${closeTag}`;
+        });
+      });
+    }
+
+    // 4. Fallback slugify for any remaining headings without an ID
+    html = html.replace(/<h([2-4])(?![^>]*\bid=)([^>]*)>(.*?)<\/h\1>/gi, (_match, level, attrs, text) => {
+      const cleanText = text.replace(/<[^>]+>/g, "").trim();
+      const slugId = cleanText.toLowerCase().replace(/[^\w\s-]/g, "").trim().replace(/\s+/g, "-");
+      return `<h${level}${attrs} id="${slugId}">${text}</h${level}>`;
+    });
+
+    // 5. Wrap tables in responsive card containers
     html = html.replace(
       /(<table[\s\S]*?<\/table>)/gi,
       (match, _p1, offset, fullStr) => {
-        const before = fullStr.slice(Math.max(0, offset - 60), offset);
-        if (before.includes('class="wp-block-table"') || before.includes("table-responsive-wrapper")) {
+        const before = fullStr.slice(Math.max(0, offset - 80), offset);
+        if (before.includes("table-responsive-wrapper") || before.includes("wp-block-table")) {
           return match;
         }
-        return `<div class="table-responsive-wrapper">${match}</div>`;
+        return `<div class="table-responsive-wrapper overflow-x-auto my-6 rounded-2xl border border-slate-200/90 shadow-2xs">${match}</div>`;
       }
     );
 
     return html;
-  }, [article?.content]);
+  }, [article?.content, article?.toc]);
 
   const breadcrumbItems = [
     { label: category?.title || article.category, href: `/category/${article.category}` },
