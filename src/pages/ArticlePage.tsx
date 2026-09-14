@@ -68,7 +68,19 @@ export function ArticlePage() {
       .replace(/<div class="wp-block-buttons[\s\S]*?<\/div>\s*<\/div>/gi, "")
       .replace(/<figure class="wp-block-image[\s\S]*?<\/figure>/gi, "");
 
-    // 2. Parse Markdown or preserved HTML with marked
+    // 2. Sanitize raw HTML tables: strip hardcoded inline styles, blank lines, and leading indentation that markdown mistakes for code blocks
+    raw = raw.replace(/<table[\s\S]*?<\/table>/gi, (tableHtml) => {
+      return tableHtml
+        .replace(/\s*style="[^"]*"/gi, "")
+        .replace(/\s*class="[^"]*"/gi, "")
+        .replace(/\r?\n\s*\r?\n/g, "\n")
+        .split("\n")
+        .map((line) => line.trim())
+        .filter((line) => line.length > 0)
+        .join("\n");
+    });
+
+    // 3. Parse Markdown or preserved HTML with marked
     let html = marked.parse(raw) as string;
 
     // 3. Ensure headings have id attributes matching TOC items
