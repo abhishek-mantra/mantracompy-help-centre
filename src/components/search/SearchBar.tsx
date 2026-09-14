@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router";
 import { Search, X } from "lucide-react";
-import { ARTICLE_REGISTRY } from "../../data/articleRegistry";
+import { searchArticles } from "../../data/articleRegistry";
 import { SearchDropdown } from "./SearchDropdown";
 
 interface SearchBarProps {
@@ -31,14 +31,7 @@ export function SearchBar({
   }, [initialQuery]);
 
   const filteredArticles = React.useMemo(() => {
-    if (!query.trim()) return [];
-    const q = query.toLowerCase().trim();
-    return ARTICLE_REGISTRY.filter((article) => {
-      const matchTitle = article.title.toLowerCase().includes(q);
-      const matchSummary = article.summary.toLowerCase().includes(q);
-      const matchKeywords = article.searchKeywords?.some((k) => k.toLowerCase().includes(q));
-      return matchTitle || matchSummary || matchKeywords;
-    });
+    return searchArticles(query);
   }, [query]);
 
   // Click outside listener

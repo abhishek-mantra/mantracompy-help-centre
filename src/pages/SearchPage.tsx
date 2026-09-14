@@ -1,18 +1,28 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useSearchParams, Link } from "react-router";
 import { Search, X, ChevronRight, Sparkles } from "lucide-react";
-import { ARTICLE_REGISTRY } from "../data/articleRegistry";
+import { ARTICLE_REGISTRY, searchArticles } from "../data/articleRegistry";
 import { CATEGORIES } from "../data/categories";
 import { Breadcrumb } from "../components/ui/Breadcrumb";
 
 function HighlightText({ text, highlight }: { text: string; highlight: string }) {
-  if (!highlight.trim()) return <>{text}</>;
-  const escaped = highlight.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-  const parts = text.split(new RegExp(`(${escaped})`, "gi"));
+  if (!highlight.trim() || !text) return <>{text}</>;
+  const tokens = highlight
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, " ")
+    .split(/\s+/)
+    .filter((t) => t.length > 2);
+
+  if (tokens.length === 0) return <>{text}</>;
+
+  const escapedTokens = tokens.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  const regex = new RegExp(`(${escapedTokens.join("|")})`, "gi");
+  const parts = text.split(regex);
+
   return (
     <>
       {parts.map((part, i) =>
-        part.toLowerCase() === highlight.toLowerCase() ? (
+        tokens.some((t) => t.toLowerCase() === part.toLowerCase()) ? (
           <span key={i} className="bg-cyan-100 text-[#043570] font-bold rounded-xs px-0.5">
             {part}
           </span>
@@ -43,21 +53,7 @@ export function SearchPage() {
   };
 
   const searchResults = useMemo(() => {
-    const q = rawQuery.trim().toLowerCase();
-    if (!q) return [];
-
-    return ARTICLE_REGISTRY.filter((article) => {
-      if (selectedCategory !== "all" && article.category !== selectedCategory) {
-        return false;
-      }
-
-      const matchTitle = article.title.toLowerCase().includes(q);
-      const matchSummary = article.summary.toLowerCase().includes(q);
-      const matchKeywords = article.searchKeywords?.some((k) => k.toLowerCase().includes(q));
-      const matchCategory = article.category.toLowerCase().includes(q);
-
-      return matchTitle || matchSummary || matchKeywords || matchCategory;
-    });
+    return searchArticles(rawQuery, selectedCategory);
   }, [rawQuery, selectedCategory]);
 
   return (

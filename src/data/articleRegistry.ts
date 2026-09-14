@@ -3927,15 +3927,107 @@ export function getAllArticles(): Article[] {
   return ARTICLES;
 }
 
-export function searchArticles(query: string): Article[] {
-  const q = query.toLowerCase().trim();
-  if (!q) return [];
-  return ARTICLES.filter(
-    (a) =>
-      a.title.toLowerCase().includes(q) ||
-      a.summary.toLowerCase().includes(q) ||
-      a.content.toLowerCase().includes(q) ||
-      (a.searchKeywords && a.searchKeywords.some((k) => k.toLowerCase().includes(q)))
-  );
+const STOP_WORDS = new Set([
+  "a", "about", "above", "after", "again", "against", "all", "am", "an", "and", "any", "are", "as", "at",
+  "be", "because", "been", "before", "being", "below", "between", "both", "but", "by",
+  "can", "could", "did", "do", "does", "doing", "down", "during",
+  "each", "few", "for", "from", "further",
+  "had", "has", "have", "having", "he", "her", "here", "hers", "herself", "him", "himself", "his", "how",
+  "i", "if", "in", "into", "is", "it", "its", "itself",
+  "just", "me", "more", "most", "my", "myself",
+  "no", "nor", "not", "now", "of", "off", "on", "once", "only", "or", "other", "our", "ours", "ourselves", "out", "over", "own",
+  "same", "should", "so", "some", "such",
+  "than", "that", "the", "their", "theirs", "them", "themselves", "then", "there", "these", "they", "this", "those", "through", "to", "too",
+  "under", "until", "up", "very",
+  "was", "we", "were", "what", "when", "where", "which", "while", "who", "whom", "why", "with", "would", "you", "your", "yours"
+]);
+
+export function searchArticles(query: string, categoryFilter?: string): Article[] {
+  const rawQuery = query.toLowerCase().trim();
+  if (!rawQuery) return [];
+
+  const cleanQuery = rawQuery.replace(/[^\w\s-]/g, " ");
+  const allTokens = cleanQuery.split(/\s+/).filter((t) => t.length > 1);
+
+  const meaningfulTokens = allTokens.filter((t) => !STOP_WORDS.has(t));
+  const tokens = meaningfulTokens.length > 0 ? meaningfulTokens : allTokens;
+
+  const targetArticles = categoryFilter && categoryFilter !== "all"
+    ? ARTICLES.filter((a) => a.category === categoryFilter)
+    : ARTICLES;
+
+  const scored: { article: Article; score: number }[] = [];
+
+  for (const article of targetArticles) {
+    let score = 0;
+    const titleLower = article.title.toLowerCase();
+    const summaryLower = (article.summary || "").toLowerCase();
+    const contentLower = (article.content || "").toLowerCase();
+    const keywordsLower = (article.searchKeywords || []).map((k) => k.toLowerCase());
+    const categoryLower = (article.category || "").toLowerCase();
+    const sectionLower = (article.section || "").toLowerCase();
+
+    // 1. Exact full-phrase matches
+    if (titleLower.includes(rawQuery)) score += 120;
+    else if (summaryLower.includes(rawQuery)) score += 70;
+    else if (contentLower.includes(rawQuery)) score += 35;
+
+    // 2. Tokenized matching
+    let matchedTokensCount = 0;
+    let highValueMatch = false;
+
+    for (const token of tokens) {
+      let tokenMatched = false;
+
+      // Title match
+      if (titleLower.includes(token)) {
+        score += 35;
+        tokenMatched = true;
+        highValueMatch = true;
+      }
+
+      // Keyword match
+      if (keywordsLower.some((k) => k.includes(token) || token.includes(k))) {
+        score += 25;
+        tokenMatched = true;
+        highValueMatch = true;
+      }
+
+      // Summary match
+      if (summaryLower.includes(token)) {
+        score += 15;
+        tokenMatched = true;
+        highValueMatch = true;
+      }
+
+      // Category / Section match
+      if (categoryLower.includes(token) || sectionLower.includes(token)) {
+        score += 10;
+        tokenMatched = true;
+      }
+
+      // Content match
+      if (contentLower.includes(token)) {
+        score += 4;
+        tokenMatched = true;
+      }
+
+      if (tokenMatched) {
+        matchedTokensCount++;
+      }
+    }
+
+    const isValidMatch = highValueMatch || matchedTokensCount >= Math.min(2, tokens.length);
+
+    if (isValidMatch && score >= 20) {
+      if (tokens.length > 1 && matchedTokensCount === tokens.length) {
+        score += 50;
+      }
+      scored.push({ article, score });
+    }
+  }
+
+  scored.sort((a, b) => b.score - a.score);
+  return scored.map((s) => s.article);
 }
 
