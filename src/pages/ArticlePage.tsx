@@ -1,7 +1,12 @@
 import { useState, useEffect, useMemo } from "react";
 import { useParams, Link, Navigate } from "react-router";
 import { marked } from "marked";
-import { getArticleBySlug, getArticlesBySection } from "../data/articleRegistry";
+import {
+  getArticleBySlug,
+  getArticlesBySection,
+  getSiblingArticles,
+  getRelatedArticles,
+} from "../data/articleRegistry";
 import { getCategoryBySlug } from "../data/categories";
 import { getSectionBySlug } from "../data/sections";
 import { Breadcrumb } from "../components/ui/Breadcrumb";
@@ -43,7 +48,8 @@ export function ArticlePage() {
     return <Navigate to="/404" replace />;
   }
 
-  const sectionArticles = getArticlesBySection(article.section);
+  const sectionArticles = getSiblingArticles(article.slug);
+  const relatedArticles = getRelatedArticles(article.slug, 4);
 
   const handleShare = () => {
     navigator.clipboard.writeText(window.location.href).then(() => {
@@ -266,28 +272,43 @@ export function ArticlePage() {
 
             {/* Related Articles Box */}
             <div className="bg-white border border-slate-200/90 rounded-2xl p-6 shadow-2xs space-y-4">
-              <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
-                <BookOpen className="size-4 text-[#043570]" />
-                <span>Related Credentialing Guides</span>
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {sectionArticles
-                  .filter((a) => a.slug !== article.slug)
-                  .slice(0, 4)
-                  .map((rel) => (
-                    <Link
-                      key={rel.slug}
-                      to={`/articles/${rel.slug}`}
-                      className="group p-3.5 rounded-xl border border-slate-200/90 hover:border-[#00c0ff] hover:bg-slate-50 transition-all block"
-                    >
-                      <h4 className="text-xs font-semibold text-slate-800 group-hover:text-[#043570] line-clamp-2 leading-snug">
+              <div className="flex items-center justify-between">
+                <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+                  <BookOpen className="size-4 text-[#043570]" />
+                  <span>Related Credentialing Guides</span>
+                </h3>
+                <Link
+                  to={`/category/${article.category}`}
+                  className="text-xs font-semibold text-[#043570] hover:text-[#00c0ff] transition-colors"
+                >
+                  View all guides →
+                </Link>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                {relatedArticles.map((rel) => (
+                  <Link
+                    key={rel.slug}
+                    to={`/articles/${rel.slug}`}
+                    className="group p-4 rounded-xl border border-slate-200/90 hover:border-[#00c0ff] hover:bg-slate-50/80 transition-all flex flex-col justify-between"
+                  >
+                    <div>
+                      <h4 className="text-sm font-semibold text-slate-800 group-hover:text-[#043570] line-clamp-2 leading-snug">
                         {rel.title}
                       </h4>
-                      <span className="text-[11px] text-slate-400 mt-1 inline-block">
-                        {rel.readTime}
+                      {rel.summary && (
+                        <p className="text-xs text-slate-500 mt-1.5 line-clamp-2 leading-relaxed">
+                          {rel.summary}
+                        </p>
+                      )}
+                    </div>
+                    <div className="flex items-center justify-between pt-3 mt-3 border-t border-slate-100 text-[11px] text-slate-400">
+                      <span>{rel.readTime}</span>
+                      <span className="font-semibold text-[#043570] group-hover:text-[#00c0ff] group-hover:translate-x-0.5 transition-all">
+                        Read guide →
                       </span>
-                    </Link>
-                  ))}
+                    </div>
+                  </Link>
+                ))}
               </div>
             </div>
           </main>

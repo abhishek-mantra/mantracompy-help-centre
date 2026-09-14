@@ -3864,6 +3864,65 @@ export function getSiblingArticles(currentSlug: string): Article[] {
   return ARTICLES.filter((a) => a.category === current.category).slice(0, 8);
 }
 
+export function getRelatedArticles(articleSlug: string, count: number = 4): Article[] {
+  const current = getArticleBySlug(articleSlug);
+  if (!current) return [];
+
+  const candidates: Article[] = [];
+  const addedSlugs = new Set<string>([current.slug]);
+
+  // 1. Explicit relatedSlugs defined on the article
+  if (current.relatedSlugs && Array.isArray(current.relatedSlugs)) {
+    for (const s of current.relatedSlugs) {
+      const found = getArticleBySlug(s);
+      if (found && !addedSlugs.has(found.slug)) {
+        candidates.push(found);
+        addedSlugs.add(found.slug);
+      }
+    }
+  }
+
+  // 2. Sibling articles in the same section
+  for (const a of ARTICLES) {
+    if (candidates.length >= count) break;
+    if (a.section === current.section && !addedSlugs.has(a.slug)) {
+      candidates.push(a);
+      addedSlugs.add(a.slug);
+    }
+  }
+
+  // 3. Sibling articles in the same category
+  for (const a of ARTICLES) {
+    if (candidates.length >= count) break;
+    if (a.category === current.category && !addedSlugs.has(a.slug)) {
+      candidates.push(a);
+      addedSlugs.add(a.slug);
+    }
+  }
+
+  // 4. Fallback essential platform & foundational guides
+  const fallbackSlugs = [
+    "why-npi-is-needed-and-how-to-find-it",
+    "caqh-authorization-and-cvo-access",
+    "onboarding-wizard-guide",
+    "managing-credentialing-tasks-and-actions",
+    "state-medical-license-verification",
+    "practice-location-and-tax-id-rules",
+    "tracking-active-insurance-status",
+    "supervisory-billing-and-incident-to-guidelines",
+  ];
+  for (const fSlug of fallbackSlugs) {
+    if (candidates.length >= count) break;
+    const found = getArticleBySlug(fSlug);
+    if (found && !addedSlugs.has(found.slug)) {
+      candidates.push(found);
+      addedSlugs.add(found.slug);
+    }
+  }
+
+  return candidates.slice(0, count);
+}
+
 export function getAllArticles(): Article[] {
   return ARTICLES;
 }
