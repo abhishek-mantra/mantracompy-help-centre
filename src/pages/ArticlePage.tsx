@@ -66,23 +66,42 @@ export function ArticlePage() {
     let html = marked.parse(raw) as string;
 
     // 3. Ensure headings have id attributes matching TOC items
-    if (article.toc && article.toc.length > 0) {
-      article.toc.forEach((item) => {
-        const escapedText = item.text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-        const regex = new RegExp(`(<h[2-4][^>]*>)(.*?${escapedText}.*?)(<\\/h[2-4]>)`, "i");
-        html = html.replace(regex, (match, openTag, textContent, closeTag) => {
-          if (openTag.includes("id=")) return match;
-          const tagWithId = openTag.replace(/>$/, ` id="${item.id}">`);
-          return `${tagWithId}${textContent}${closeTag}`;
-        });
-      });
-    }
+    const normalize = (str: string) =>
+      str
+        .toLowerCase()
+        .replace(/&amp;/g, "&")
+        .replace(/&#39;/g, "'")
+        .replace(/&quot;/g, '"')
+        .replace(/[^\w\s]/g, "")
+        .trim()
+        .replace(/\s+/g, " ");
 
-    // 4. Fallback slugify for any remaining headings without an ID
-    html = html.replace(/<h([2-4])(?![^>]*\bid=)([^>]*)>(.*?)<\/h\1>/gi, (_match, level, attrs, text) => {
-      const cleanText = text.replace(/<[^>]+>/g, "").trim();
-      const slugId = cleanText.toLowerCase().replace(/[^\w\s-]/g, "").trim().replace(/\s+/g, "-");
-      return `<h${level}${attrs} id="${slugId}">${text}</h${level}>`;
+    const tocList = article.toc || [];
+    let tocIndex = 0;
+
+    html = html.replace(/<h([2-4])([^>]*)>([\s\S]*?)<\/h\1>/gi, (match, level, attrs, innerText) => {
+      if (attrs.includes("id=")) return match;
+      const cleanInner = innerText
+        .replace(/<[^>]+>/g, "")
+        .replace(/&amp;/g, "&")
+        .replace(/&#39;/g, "'")
+        .replace(/&quot;/g, '"')
+        .trim();
+
+      // Match against TOC by normalized text
+      const matchedItem = tocList.find((item) => normalize(item.text) === normalize(cleanInner));
+
+      let id = "";
+      if (matchedItem) {
+        id = matchedItem.id;
+      } else if (tocList[tocIndex] && Number(level) === tocList[tocIndex].level) {
+        id = tocList[tocIndex].id;
+        tocIndex++;
+      } else {
+        id = cleanInner.toLowerCase().replace(/[^\w\s-]/g, "").trim().replace(/\s+/g, "-");
+      }
+
+      return `<h${level}${attrs} id="${id}">${innerText}</h${level}>`;
     });
 
     // 5. Wrap tables in responsive card containers

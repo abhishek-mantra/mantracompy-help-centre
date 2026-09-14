@@ -10,28 +10,55 @@ export function TableOfContents({ items }: TableOfContentsProps) {
   const [activeId, setActiveId] = useState<string>(items[0]?.id || "");
 
   useEffect(() => {
-    if (items.length === 0) return;
+    if (!items || items.length === 0) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
-        });
-      },
-      {
-        rootMargin: "-80px 0% -60% 0%",
-        threshold: 0.1,
+    setActiveId(items[0]?.id || "");
+
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      // If close to bottom of document, highlight the last item
+      if (scrollPosition + windowHeight >= documentHeight - 60) {
+        setActiveId(items[items.length - 1].id);
+        return;
       }
-    );
 
-    items.forEach((item) => {
-      const element = document.getElementById(item.id);
-      if (element) observer.observe(element);
-    });
+      // If at the very top of the page, highlight the first item
+      if (scrollPosition < 120) {
+        setActiveId(items[0].id);
+        return;
+      }
 
-    return () => observer.disconnect();
+      // Find the heading the user has scrolled to or past (offset threshold = 140px)
+      const headerOffset = 140;
+      let currentActiveId = items[0].id;
+
+      for (let i = 0; i < items.length; i++) {
+        const element = document.getElementById(items[i].id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= headerOffset) {
+            currentActiveId = items[i].id;
+          } else {
+            // Headings appear in chronological order; stop at first heading below threshold
+            break;
+          }
+        }
+      }
+
+      setActiveId(currentActiveId);
+    };
+
+    // Run initial check after DOM paint
+    const timer = setTimeout(handleScroll, 120);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [items]);
 
   if (!items || items.length === 0) return null;
@@ -57,14 +84,16 @@ export function TableOfContents({ items }: TableOfContentsProps) {
                   e.preventDefault();
                   const target = document.getElementById(item.id);
                   if (target) {
-                    target.scrollIntoView({ behavior: "smooth", block: "start" });
+                    const yOffset = -90;
+                    const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                    window.scrollTo({ top: y, behavior: "smooth" });
                     history.pushState(null, "", `#${item.id}`);
                     setActiveId(item.id);
                   }
                 }}
-                className={`group flex items-start gap-1.5 py-1 px-2 rounded-lg transition-all ${
+                className={`group flex items-start gap-1.5 py-1.5 px-2.5 rounded-lg transition-all ${
                   isActive
-                    ? "font-bold text-[#043570] bg-blue-100/50"
+                    ? "font-bold text-[#043570] bg-blue-100/70 border-l-2 border-[#043570]"
                     : "text-slate-600 hover:text-slate-900 hover:bg-slate-100/80"
                 }`}
               >
