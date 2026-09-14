@@ -6635,15 +6635,12 @@ export function getArticleForFormStep(formStep: string): Article | undefined {
   return ARTICLES.find((a) => a.formStepTarget === formStep);
 }
 
-export function searchArticles(query: string): Article[] {
-  const q = query.trim().toLowerCase();
-  if (!q) return [];
-  
-  return ARTICLES.filter((article) => {
-    const titleMatch = article.title.toLowerCase().includes(q);
-    const summaryMatch = article.summary.toLowerCase().includes(q);
-    const keywordMatch = article.searchKeywords?.some((k) => k.toLowerCase().includes(q));
-    const contentMatch = article.content.toLowerCase().includes(q);
-    return titleMatch || summaryMatch || keywordMatch || contentMatch;
-  }).slice(0, 15);
+export const ARTICLE_REGISTRY = ARTICLES;
+
+export function getSiblingArticles(currentSlug: string): Article[] {
+  const current = getArticleBySlug(currentSlug);
+  if (!current) return [];
+  const inSection = ARTICLES.filter((a) => a.section === current.section);
+  if (inSection.length > 1) return inSection;
+  return ARTICLES.filter((a) => a.category === current.category).slice(0, 8);
 }
