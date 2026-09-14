@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useParams, Link, Navigate } from "react-router";
 import { getArticleBySlug, getArticlesBySection } from "../data/articleRegistry";
 import { getCategoryBySlug } from "../data/categories";
