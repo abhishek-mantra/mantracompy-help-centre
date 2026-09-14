@@ -183,7 +183,7 @@ export function ArticlePage() {
                   </span>
                 </div>
                 <a
-                  href="http://localhost:5173/provider/credentialing"
+                  href="https://mantra-comply.vercel.app/provider/credentialing"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#043570] hover:bg-[#032a57] text-white font-semibold whitespace-nowrap shadow-2xs transition-colors"
