@@ -552,6 +552,211 @@ By signing the MantraComply Attestation & Release Form, you authorize our CVO an
 
 The release form strictly limits disclosures to legitimate healthcare credentialing and quality assurance purposes. You retain the legal right to review all primary source verification reports gathered during your credentialing cycle.
 """
+    },
+    {
+        "slug": "cms-identity-and-access-ia-account-guide",
+        "title": "CMS Identity & Access (I&A) Management: Provider Setup & Surrogate Delegation",
+        "category": "health-plans-payers",
+        "section": "government-payers",
+        "summary": "Everything you need to know about CMS Identity & Access (I&A) accounts, managing NPPES and PECOS access, appointing Authorized Officials, and delegating surrogate access to MantraComply.",
+        "readTime": "5 min read",
+        "lastUpdated": "September 2026",
+        "searchKeywords": ["i&a", "ia account", "identity and access", "cms", "pecos", "nppes", "surrogate", "authorized official", "medicare enrollment"],
+        "formStepTarget": "ia-account",
+        "toc": [
+            {"id": "what-is-cms-ia", "text": "What Is the CMS Identity & Access (I&A) System?", "level": 2},
+            {"id": "why-mantracomply-asks", "text": "Why Does MantraComply Ask If You Have an I&A Account?", "level": 2},
+            {"id": "user-roles-explained", "text": "Understanding I&A Roles: Individual, AO, DO & Surrogate", "level": 2},
+            {"id": "how-to-create-ia-account", "text": "Step-by-Step: How to Register for an I&A Account", "level": 2},
+            {"id": "delegating-surrogate-access", "text": "Authorizing MantraComply as Your Surrogate in I&A", "level": 2},
+            {"id": "troubleshooting-mfa-logins", "text": "Troubleshooting Logins, Lost Passwords & MFA Resets", "level": 2},
+        ],
+        "relatedSlugs": ["why-npi-is-needed-and-how-to-find-it", "medicare-provider-enrollment", "caqh-authorization-and-cvo-access"],
+        "content": """
+## What Is the CMS Identity & Access (I&A) System?
+
+The **Identity & Access (I&A) Management System** (`ia.cms.gov`) is the central authentication gateway operated by the Centers for Medicare & Medicaid Services (CMS). It provides a single, secure login for healthcare providers and clinical organizations to access federal healthcare applications:
+
+1. **NPPES (National Plan and Provider Enumeration System):** Where your 10-digit Type 1 (Individual) and Type 2 (Organization) National Provider Identifier (NPI) records, practice locations, and taxonomy codes are maintained.
+2. **PECOS (Provider Enrollment, Chain, and Ownership System):** Where Medicare enrollment applications (CMS-855I, CMS-855B, CMS-855A), electronic revalidations, reassignment of billing rights, and practice changes are submitted.
+3. **EHR / Quality Payment Program (QPP):** CMS Merit-based Incentive Payment System (MIPS) and provider performance registries.
+
+> **Key Takeaway:** If you have ever applied for an NPI online through NPPES or filed a Medicare PECOS application, you already have an active CMS I&A account. Your NPPES and PECOS usernames and passwords are identical because they both authenticate through the CMS I&A portal.
+
+---
+
+## Why Does MantraComply Ask If You Have an I&A Account?
+
+In the **Insurance step** of your MantraComply onboarding wizard, you are asked: *"Do you have an I&A account?"*
+
+Here is why our credentialing team needs this information:
+
+- **If You Answer "Yes":** MantraComply's Credentials Verification Organization (CVO) can send a secure **Surrogate Connection Request** to your CMS I&A account. Once you click "Approve", our credentialing analysts can prepare, audit, and submit your Medicare CMS-855 forms directly in PECOS and maintain your NPPES taxonomy listings **without you needing to hand over your personal master password**.
+- **If You Answer "No":** MantraComply's enrollment specialists will guide you through setting up your initial CMS I&A account so that your federal provider records are registered correctly under your legal name, NPI, and Social Security Number.
+- **Fast-Tracked Approvals:** Medicare Administrative Contractors (MACs like Noridian, Palmetto, Novitas, or NGS) experience severe delays when applications are submitted with unverified or conflicted I&A relationships. Knowing your status upfront prevents weeks of administrative holds.
+
+---
+
+## Understanding I&A Roles: Individual, AO, DO & Surrogate
+
+CMS I&A organizes user permissions using strict hierarchical roles:
+
+| Role Name | Who Holds It | What Permissions They Have |
+|---|---|---|
+| **Individual Practitioner** | Solo clinician, physician, or NP | Manages their own individual Type 1 NPI in NPPES and personal Medicare PECOS enrollment. Can appoint surrogates. |
+| **Authorized Official (AO)** | Practice Owner, Partner, or CEO | Legally responsible for a Type 2 Group Practice. Has sole authority to approve organizational enrollments and designate staff. |
+| **Delegated Official (DO)** | Practice Manager or Director | Designated by the AO to execute enrollment applications and manage day-to-day PECOS actions on behalf of the group. |
+| **Surrogate (Employer / Third-Party CVO)** | MantraComply CVO | Authorized by the individual provider or group to prepare, draft, and track PECOS/NPPES submissions on their behalf. |
+
+> **Security Guarantee:** Granting MantraComply "Surrogate" access does **not** grant access to personal banking information or private patient health records. It solely permits credentialing file assembly and Medicare revalidation tracking.
+
+---
+
+## Step-by-Step: How to Register for an I&A Account
+
+If you do not currently have a CMS I&A account:
+
+1. **Visit the CMS I&A Portal:** Go to [ia.cms.gov](https://ia.cms.gov) or [nppes.cms.hhs.gov](https://nppes.cms.hhs.gov).
+2. **Click "Create Account":** Review the federal system consent warning and select **Create Account Now**.
+3. **Identity Verification:** Enter your full legal name matching your Social Security card, Date of Birth, SSN, and home address. CMS verifies your identity electronically through credit bureau knowledge-based identity checks.
+4. **Enter NPI:** If you already possess an individual NPI, enter your 10-digit number to link your clinical identity immediately.
+5. **Set Credentials & MFA:** Choose a username, create a strong password, and configure Multi-Factor Authentication (MFA) via SMS, email, or an authenticator app (such as Google Authenticator).
+6. **Confirmation:** CMS will send a verification link to your registered email address. Once verified, return to MantraComply and mark your I&A account as active.
+
+---
+
+## Authorizing MantraComply as Your Surrogate in I&A
+
+When MantraComply initiates Medicare enrollment or updates your PECOS roster, follow these steps to accept our surrogate invitation:
+
+1. Log into [ia.cms.gov](https://ia.cms.gov) with your CMS username, password, and two-factor code.
+2. From the main dashboard, locate the **"My Connections"** or **"Surrogate Connections"** section.
+3. You will see a pending connection request from **MantraComply CVO**.
+4. Click **Review Request** and inspect the requested permissions (NPPES & PECOS drafting permissions).
+5. Select **Approve Connection**.
+6. Notify your MantraComply onboarding coordinator via the **Tasks** tab or chat widget. Our team will immediately take over drafting your Medicare documentation.
+
+---
+
+## Troubleshooting Logins, Lost Passwords & MFA Resets
+
+Because healthcare providers often set up their I&A account during medical residency or initial licensure, account lockout issues are very common:
+
+- **Forgot Username or Password:** Click **"Forgot User ID"** or **"Forgot Password"** on the [ia.cms.gov](https://ia.cms.gov) login page. You will need your Social Security Number and answers to your security questions.
+- **MFA Phone Number Changed:** If you no longer have access to the phone number on file for multi-factor authentication, contact the **External User Services (EUS) Help Desk** at **1-866-484-8049** (TTY: 1-866-523-4759). The EUS team operates Monday through Friday, 7:00 AM to 7:00 PM ET.
+- **Duplicate Accounts Flagged:** Never create a second I&A account under the same SSN. CMS will automatically freeze both records. Always call the EUS help desk to unlock your original master account.
+"""
+    },
+    {
+        "slug": "availity-essentials-account-guide",
+        "title": "Availity Essentials: Account Setup, Payer Credentialing & Directory Attestation",
+        "category": "health-plans-payers",
+        "section": "commercial-payers",
+        "summary": "A comprehensive guide to Availity Essentials: registering your organization, managing multi-payer provider credentialing, completing 90-day directory attestations, and granting administrator access to MantraComply.",
+        "readTime": "5 min read",
+        "lastUpdated": "September 2026",
+        "searchKeywords": ["availity", "availity essentials", "provider portal", "payer enrollment", "directory attestation", "anthem", "bcbs", "humana", "clearinghouse"],
+        "formStepTarget": "availity-account",
+        "toc": [
+            {"id": "what-is-availity", "text": "What Is Availity Essentials?", "level": 2},
+            {"id": "why-mantracomply-asks", "text": "Why Does MantraComply Ask for Your Availity Account?", "level": 2},
+            {"id": "major-payers-on-availity", "text": "Major Commercial Payers Requiring Availity", "level": 2},
+            {"id": "account-types-explained", "text": "Organization Administrator (PAA) vs. User Roles", "level": 2},
+            {"id": "registering-your-account", "text": "Step-by-Step: Registering for Availity Essentials", "level": 2},
+            {"id": "directory-attestation-90-days", "text": "Managing 90-Day Provider Directory Attestations", "level": 2},
+            {"id": "granting-mantracomply-access", "text": "Granting MantraComply Access in Availity", "level": 2},
+        ],
+        "relatedSlugs": ["choosing-commercial-vs-government-health-plans", "bcbs-provider-credentialing", "elevance-health-provider-credentialing"],
+        "content": """
+## What Is Availity Essentials?
+
+**Availity Essentials** (`availity.com`) is the largest real-time multi-payer healthcare provider portal and clearinghouse in the United States. It connects healthcare providers, group practices, and hospitals with commercial and Medicaid health plans across the country.
+
+While CAQH ProView handles primary source data gathering, **Availity is the operational execution hub** used for:
+
+1. **Online Provider Credentialing & Contracting:** Submitting initial provider enrollment packets and roster adds directly to participating health plan networks.
+2. **Provider Demographic Updates:** Maintaining physical office hours, telehealth availability, accepting new patient status, and billing locations.
+3. **Mandatory Directory Attestation:** Complying with federal No Surprises Act mandates to verify provider contact details every 90 days.
+4. **Revenue Cycle Transactions:** Real-time patient eligibility & benefit verification (270/271), electronic prior authorization submissions, electronic claim status tracking (276/277), and electronic remittance advice (ERA 835).
+
+---
+
+## Why Does MantraComply Ask for Your Availity Account?
+
+In the **Insurance step** of your onboarding wizard, you are asked: *"Do you have an Availity account?"*
+
+Understanding your Availity registration status is critical because:
+
+- **Immediate Payer Submission:** Many top health plans (such as Elevance / Anthem, Florida Blue, Highmark, and Humana) mandate that credentialing applications or provider adds be submitted exclusively through Availity's provider enrollment tool.
+- **Preventing Duplicate Organization Conflicts:** Availity strictly prohibits duplicate organizational registrations under the same Tax Identification Number (TIN/EIN). If your practice already registered an Availity organization years ago, attempting to create a second account will freeze electronic routing.
+- **Fast-Tracking Authorization:** If you already have an active Availity account, your practice's Primary Access Administrator (PAA) can simply add MantraComply as an authorized user. Our credentialing specialists can then submit paperwork, track real-time payer committee review, and download countersigned contracts on your behalf.
+
+---
+
+## Major Commercial Payers Requiring Availity
+
+A large portion of MantraComply's contracted health plans route credentialing and network operations through Availity:
+
+| Health Plan / Network | What Availity Is Used For | States / Coverage |
+|---|---|---|
+| **Elevance Health (Anthem, Wellpoint)** | Provider credentialing, contract addenda, demographic updates, claim appeals | Nationwide (14+ commercial Anthem states) |
+| **Blue Cross Blue Shield Plans** | Credentialing submissions, 90-day directory attestations, fee schedules | FL Blue, BCBS MI, Highmark, Premera, CareFirst, BCBS TX |
+| **Humana** | Commercial and Medicare Advantage provider enrollment, roster maintenance | Nationwide |
+| **Ambetter / Centene** | Provider tools, panel status, claims, and contracting support | 26+ Marketplace states |
+| **Wellcare & Medicaid MCOs** | State Medicaid managed care credentialing rosters | Varies by state health authority |
+
+---
+
+## Organization Administrator (PAA) vs. User Roles
+
+Availity employs strict administrative role division:
+
+- **Primary Access Administrator (PAA):** The person who initially registers the practice's Tax ID (TIN). The PAA has absolute administrative authority to approve users, assign payer access, designate secondary administrators, and sign electronic agreements.
+- **Secondary Administrator:** Appointed by the PAA with the same administrative capabilities to manage staff and external billing/credentialing partners.
+- **Standard User (Clinical / Credentialing Staff):** Users assigned specific permissions to submit credentialing packets, verify eligibility, or review claims without having power to modify practice banking or primary tax information.
+
+---
+
+## Step-by-Step: Registering for Availity Essentials
+
+If your practice does not yet have an Availity account, registration takes only 10 to 15 minutes:
+
+1. **Navigate to Availity:** Go to [availity.com](https://www.availity.com) and click **Register**.
+2. **Select Provider Organization:** Choose **Healthcare Provider Organization** (clinics, solo practices, billing entities).
+3. **Enter Practice Demographics:**
+   - Legal Business Name (must match your IRS Form W-9 exactly).
+   - Federal Tax Identification Number (EIN or SSN).
+   - Physical practice street address (P.O. Boxes are not accepted for registration).
+   - Type 2 Organization NPI (if applicable) and Type 1 Individual NPI.
+4. **Identify Primary Access Administrator (PAA):** Designate the authorized legal representative or clinic director.
+5. **Email Verification & Identity Screening:** Availity will send an activation email. The PAA will complete a short identity validation step to finalize security.
+6. **Update MantraComply:** Once your Availity account is active, mark **Yes** in your MantraComply Insurance form step.
+
+---
+
+## Managing 90-Day Provider Directory Attestations
+
+Under the federal **Consolidated Appropriations Act (CAA) / No Surprises Act**, health plans are legally required to audit and update their public provider directories every **90 calendar days**.
+
+Payers such as Anthem, Blue Cross Blue Shield, and Humana execute this verification directly through the **Availity Provider Data Management (PDM)** tool:
+
+- **What Happens If You Miss the 90-Day Window?** Payers are mandated by federal law to hide or suppress unverified providers from public directories and patient search tools. Continued non-compliance can lead to automated claims holds.
+- **How MantraComply Helps:** Our automated compliance dashboard monitors your 90-day re-attestation cycles across all active payers and submits updated directory attestations through Availity on your behalf.
+
+---
+
+## Granting MantraComply Access in Availity
+
+To authorize MantraComply's credentialing specialists to submit applications through your Availity portal:
+
+1. Log into your Availity Essentials account as the **Primary Access Administrator (PAA)**.
+2. In the top navigation bar, click **My Account** > **User Management**.
+3. Click **Add User** or **Invite User**.
+4. Enter the MantraComply assigned credentialing coordinator's professional email address (provided in your onboarding dashboard).
+5. In the permissions selector, check **Provider Enrollment / Credentialing**, **Provider Data Management (PDM)**, and **Eligibility & Benefits**.
+6. Click **Send Invitation**.
+7. Our CVO team will accept the invitation and begin managing your commercial health plan panel submissions immediately.
+"""
     }
 ]
 
@@ -671,17 +876,181 @@ export function getArticleForFormStep(formStep: string): Article | undefined {
   return ARTICLES.find((a) => a.formStepTarget === formStep);
 }
 
-export function searchArticles(query: string): Article[] {
-  const q = query.trim().toLowerCase();
-  if (!q) return [];
-  
-  return ARTICLES.filter((article) => {
-    const titleMatch = article.title.toLowerCase().includes(q);
-    const summaryMatch = article.summary.toLowerCase().includes(q);
-    const keywordMatch = article.searchKeywords?.some((k) => k.toLowerCase().includes(q));
-    const contentMatch = article.content.toLowerCase().includes(q);
-    return titleMatch || summaryMatch || keywordMatch || contentMatch;
-  }).slice(0, 15);
+export const ARTICLE_REGISTRY = ARTICLES;
+
+export function getSiblingArticles(currentSlug: string): Article[] {
+  const current = getArticleBySlug(currentSlug);
+  if (!current) return [];
+  const inSection = ARTICLES.filter((a) => a.section === current.section);
+  if (inSection.length > 1) return inSection;
+  return ARTICLES.filter((a) => a.category === current.category).slice(0, 8);
+}
+
+export function getRelatedArticles(articleSlug: string, count: number = 4): Article[] {
+  const current = getArticleBySlug(articleSlug);
+  if (!current) return [];
+
+  const candidates: Article[] = [];
+  const addedSlugs = new Set<string>([current.slug]);
+
+  // 1. Explicit relatedSlugs defined on the article
+  if (current.relatedSlugs && Array.isArray(current.relatedSlugs)) {
+    for (const s of current.relatedSlugs) {
+      const found = getArticleBySlug(s);
+      if (found && !addedSlugs.has(found.slug)) {
+        candidates.push(found);
+        addedSlugs.add(found.slug);
+      }
+    }
+  }
+
+  // 2. Sibling articles in the same section
+  for (const a of ARTICLES) {
+    if (candidates.length >= count) break;
+    if (a.section === current.section && !addedSlugs.has(a.slug)) {
+      candidates.push(a);
+      addedSlugs.add(a.slug);
+    }
+  }
+
+  // 3. Sibling articles in the same category
+  for (const a of ARTICLES) {
+    if (candidates.length >= count) break;
+    if (a.category === current.category && !addedSlugs.has(a.slug)) {
+      candidates.push(a);
+      addedSlugs.add(a.slug);
+    }
+  }
+
+  // 4. Fallback essential platform & foundational guides
+  const fallbackSlugs = [
+    "why-npi-is-needed-and-how-to-find-it",
+    "caqh-authorization-and-cvo-access",
+    "onboarding-wizard-guide",
+    "managing-credentialing-tasks-and-actions",
+    "state-medical-license-verification",
+    "practice-location-and-tax-id-rules",
+    "tracking-active-insurance-status",
+    "supervisory-billing-and-incident-to-guidelines",
+  ];
+  for (const fSlug of fallbackSlugs) {
+    if (candidates.length >= count) break;
+    const found = getArticleBySlug(fSlug);
+    if (found && !addedSlugs.has(found.slug)) {
+      candidates.push(found);
+      addedSlugs.add(found.slug);
+    }
+  }
+
+  return candidates.slice(0, count);
+}
+
+export function getAllArticles(): Article[] {
+  return ARTICLES;
+}
+
+const STOP_WORDS = new Set([
+  "a", "about", "above", "after", "again", "against", "all", "am", "an", "and", "any", "are", "as", "at",
+  "be", "because", "been", "before", "being", "below", "between", "both", "but", "by",
+  "can", "could", "did", "do", "does", "doing", "down", "during",
+  "each", "few", "for", "from", "further",
+  "had", "has", "have", "having", "he", "her", "here", "hers", "herself", "him", "himself", "his", "how",
+  "i", "if", "in", "into", "is", "it", "its", "itself",
+  "just", "me", "more", "most", "my", "myself",
+  "no", "nor", "not", "now", "of", "off", "on", "once", "only", "or", "other", "our", "ours", "ourselves", "out", "over", "own",
+  "same", "should", "so", "some", "such",
+  "than", "that", "the", "their", "theirs", "them", "themselves", "then", "there", "these", "they", "this", "those", "through", "to", "too",
+  "under", "until", "up", "very",
+  "was", "we", "were", "what", "when", "where", "which", "while", "who", "whom", "why", "with", "would", "you", "your", "yours"
+]);
+
+export function searchArticles(query: string, categoryFilter?: string): Article[] {
+  const rawQuery = query.toLowerCase().trim();
+  if (!rawQuery) return [];
+
+  const cleanQuery = rawQuery.replace(/[^\\w\\s-]/g, " ");
+  const allTokens = cleanQuery.split(/\\s+/).filter((t) => t.length > 1);
+
+  const meaningfulTokens = allTokens.filter((t) => !STOP_WORDS.has(t));
+  const tokens = meaningfulTokens.length > 0 ? meaningfulTokens : allTokens;
+
+  const targetArticles = categoryFilter && categoryFilter !== "all"
+    ? ARTICLES.filter((a) => a.category === categoryFilter)
+    : ARTICLES;
+
+  const scored: { article: Article; score: number }[] = [];
+
+  for (const article of targetArticles) {
+    let score = 0;
+    const titleLower = article.title.toLowerCase();
+    const summaryLower = (article.summary || "").toLowerCase();
+    const contentLower = (article.content || "").toLowerCase();
+    const keywordsLower = (article.searchKeywords || []).map((k) => k.toLowerCase());
+    const categoryLower = (article.category || "").toLowerCase();
+    const sectionLower = (article.section || "").toLowerCase();
+
+    // 1. Exact full-phrase matches
+    if (titleLower.includes(rawQuery)) score += 120;
+    else if (summaryLower.includes(rawQuery)) score += 70;
+    else if (contentLower.includes(rawQuery)) score += 35;
+
+    // 2. Tokenized matching
+    let matchedTokensCount = 0;
+    let highValueMatch = false;
+
+    for (const token of tokens) {
+      let tokenMatched = false;
+
+      // Title match
+      if (titleLower.includes(token)) {
+        score += 35;
+        tokenMatched = true;
+        highValueMatch = true;
+      }
+
+      // Keyword match
+      if (keywordsLower.some((k) => k.includes(token) || token.includes(k))) {
+        score += 25;
+        tokenMatched = true;
+        highValueMatch = true;
+      }
+
+      // Summary match
+      if (summaryLower.includes(token)) {
+        score += 15;
+        tokenMatched = true;
+        highValueMatch = true;
+      }
+
+      // Category / Section match
+      if (categoryLower.includes(token) || sectionLower.includes(token)) {
+        score += 10;
+        tokenMatched = true;
+      }
+
+      // Content match
+      if (contentLower.includes(token)) {
+        score += 4;
+        tokenMatched = true;
+      }
+
+      if (tokenMatched) {
+        matchedTokensCount++;
+      }
+    }
+
+    const isValidMatch = highValueMatch || matchedTokensCount >= Math.min(2, tokens.length);
+
+    if (isValidMatch && score >= 20) {
+      if (tokens.length > 1 && matchedTokensCount === tokens.length) {
+        score += 50;
+      }
+      scored.push({ article, score });
+    }
+  }
+
+  scored.sort((a, b) => b.score - a.score);
+  return scored.map((s) => s.article);
 }
 """
     
