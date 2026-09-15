@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router";
 import { Toaster } from "sonner";
 import { Header } from "./components/layout/Header";
 import { Footer } from "./components/layout/Footer";
-import { FloatingSupportButton } from "./components/ui/FloatingSupportButton";
 import { HomePage } from "./pages/HomePage";
 import { CategoryPage } from "./pages/CategoryPage";
 import { ArticlePage } from "./pages/ArticlePage";
@@ -37,7 +36,6 @@ export function App() {
           </Routes>
         </div>
         <Footer />
-        <FloatingSupportButton />
       </div>
     </BrowserRouter>
   );
