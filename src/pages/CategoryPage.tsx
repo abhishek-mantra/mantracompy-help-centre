@@ -74,6 +74,11 @@ export function CategoryPage() {
         <main className="space-y-8">
           {sections.map((section) => {
             const allArticles = getArticlesBySection(section.slug);
+            // Hide section if it has no articles
+            if (allArticles.length === 0) {
+              return null;
+            }
+
             const displayedArticles = allArticles.filter((art) => {
               if (!filterQuery.trim()) return true;
               const q = filterQuery.toLowerCase();
@@ -84,7 +89,8 @@ export function CategoryPage() {
               );
             });
 
-            if (displayedArticles.length === 0 && filterQuery.trim()) {
+            // Hide section if filter query leaves 0 articles
+            if (displayedArticles.length === 0) {
               return null;
             }
 

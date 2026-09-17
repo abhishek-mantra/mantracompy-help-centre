@@ -760,8 +760,34 @@ To authorize MantraComply's credentialing specialists to submit applications thr
     }
 ]
 
+# 20 Excluded irrelevant articles: 13 internal careers/jobs + 7 competitor/alternative SEO comparisons
+EXCLUDED_SLUGS = {
+    # 13 Careers / Job Postings
+    "full-stack-developer",
+    "implementation-manager-healthcare",
+    "customer-success-manager-healthcare",
+    "senior-account-executive-healthcare",
+    "account-executive-healthcare",
+    "business-development-intern-us-healthcare",
+    "business-development-representative-us-healthcare",
+    "customer-success-associate-healthcare",
+    "payer-enrollment-specialist",
+    "credentialing-quality-analyst",
+    "credentialing-team-lead",
+    "provider-enrollment-specialist",
+    "credentialing-specialist-us-healthcare-job",
+    # 7 Competitor & Alternative Comparisons
+    "certifyos-competitors",
+    "medallion-competitors",
+    "3won-competitors",
+    "symplr-competitors",
+    "medtrainer-competitors",
+    "alma-competitors",
+    "mantracomply-vs-modio",
+}
+
 def load_scraped_blogs():
-    """Load all 108 scraped blogs from mantracomply/raw_data/all_posts.json"""
+    """Load scraped blogs from mantracomply/raw_data/all_posts.json, excluding careers and competitors"""
     if not MANTRA_POSTS_PATH.exists():
         print(f"File {MANTRA_POSTS_PATH} not found!")
         return []
@@ -774,6 +800,12 @@ def load_scraped_blogs():
     
     for p in posts:
         slug = p.get("slug")
+        cats = p.get("categories", [])
+        
+        # Exclude job postings and competitor comparisons
+        if slug in EXCLUDED_SLUGS or 191 in cats or 186 in cats:
+            continue
+
         title = html.unescape(p.get("title", {}).get("rendered", "Untitled"))
         content_html = p.get("content", {}).get("rendered", "")
         
@@ -784,33 +816,63 @@ def load_scraped_blogs():
             clean_text = re.sub(r'<[^>]+>', '', content_html).strip()
             clean_summary = clean_text[:160] + "..." if len(clean_text) > 160 else clean_text
             
-        # Determine category & section mapping
-        cat = "practice-compliance"
-        sec = "cvo-automation"
-        
         slug_lower = slug.lower()
-        if any(k in slug_lower for k in ["caqh"]):
+        
+        # 1. UK Health Plans & Insurers (Categories 187/188 or UK keywords)
+        if 187 in cats or 188 in cats or any(k in slug_lower for k in [
+            "bupa", "axa-health", "aviva", "vitality", "benenden", "exeter", 
+            "simply-health", "wpa", "healix", "freedom-health", "allianz-care", "april-international"
+        ]):
+            cat = "health-plans-payers"
+            sec = "uk-health-plans"
+            
+        # 2. Specialty Provider Guides & Eligibility
+        elif any(k in slug_lower for k in [
+            "nurse-practitioner", "dietitian", "chiropractor", "physiotherapist", 
+            "speech-therapist", "dental", "addiction", "mental-health", "telehealth", "physician"
+        ]):
+            cat = "getting-started-npi"
+            sec = "provider-eligibility"
+            
+        # 3. CAQH & Identity
+        elif "caqh" in slug_lower or 220 in cats:
             cat = "caqh-identity"
             sec = "caqh-proview"
-        elif any(k in slug_lower for k in ["aetna", "anthem", "bcbs", "cigna", "medicare", "medicaid", "humana", "kaiser", "united", "centene", "molina", "payer", "health-plan", "blue-shield"]):
+            
+        # 4. US Payers
+        elif any(k in slug_lower for k in ["medicare", "medicaid", "tricare", "triwest"]):
             cat = "health-plans-payers"
-            if any(k in slug_lower for k in ["medicare", "medicaid"]):
-                sec = "government-payers"
-            elif any(k in slug_lower for k in ["aetna", "anthem", "bcbs", "cigna", "united"]):
-                sec = "commercial-payers"
-            else:
-                sec = "specialty-payers"
-        elif any(k in slug_lower for k in ["license", "physician", "therapist", "acupuncturist", "chiropractor", "dietitian", "nurse", "podiatrist", "speech", "telehealth", "credentialing-companies", "malpractice"]):
-            cat = "licenses-certifications"
-            if "malpractice" in slug_lower:
-                sec = "malpractice-insurance"
-            elif "license" in slug_lower:
-                sec = "state-licenses"
-            else:
-                sec = "board-certification"
-        elif any(k in slug_lower for k in ["onboard", "turnaround", "getting-started", "guide", "npi", "alternative", "competitor"]):
+            sec = "government-payers"
+            
+        elif any(k in slug_lower for k in ["aetna", "anthem", "bcbs", "cigna", "united", "blue-shield", "highmark", "premera", "florida-blue"]):
+            cat = "health-plans-payers"
+            sec = "commercial-payers"
+            
+        elif any(k in slug_lower for k in [
+            "centene", "molina", "humana", "kaiser", "guidewell", "hcsc", "cvs-health", 
+            "health-net", "healthpartners", "parallon", "evernorth", "ambetter", "verge-health", 
+            "optum", "healthfirst", "wellcare"
+        ]):
+            cat = "health-plans-payers"
+            sec = "specialty-payers"
+            
+        # 5. Onboarding & Timelines & Mistakes
+        elif any(k in slug_lower for k in ["turnaround", "re-credentialing", "mistakes", "provider-credentialing-process", "privileging"]):
             cat = "getting-started-npi"
             sec = "onboarding-process"
+            
+        # 6. Licenses & Malpractice
+        elif "malpractice" in slug_lower:
+            cat = "licenses-certifications"
+            sec = "malpractice-insurance"
+        elif "license" in slug_lower:
+            cat = "licenses-certifications"
+            sec = "state-licenses"
+            
+        # 7. CVO, Delegated Credentialing & Automation
+        else:
+            cat = "practice-compliance"
+            sec = "cvo-automation"
             
         # Extract headings for TOC
         toc = []

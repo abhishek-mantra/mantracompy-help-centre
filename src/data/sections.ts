@@ -3,12 +3,6 @@ import { Section } from "../types/helpCenter";
 export const SECTIONS: Section[] = [
   // Getting Started & NPI
   {
-    slug: "platform-tutorials",
-    title: "MantraComply Platform & App Tutorials",
-    category: "getting-started-npi",
-    description: "Step-by-step guides for the 12-step Credentialing Wizard, Tasks, and Active Insurance.",
-  },
-  {
     slug: "npi-requirements",
     title: "NPI & Identifier Fundamentals",
     category: "getting-started-npi",
@@ -18,13 +12,13 @@ export const SECTIONS: Section[] = [
     slug: "onboarding-process",
     title: "Onboarding & Credentialing Timeline",
     category: "getting-started-npi",
-    description: "Understanding application steps, timelines, and how to fast-track your file.",
+    description: "Understanding application steps, turnaround times, and re-credentialing cycles.",
   },
   {
     slug: "provider-eligibility",
     title: "Specialty Credentialing Guides",
     category: "getting-started-npi",
-    description: "Guides for therapists, psychiatrists, nurse practitioners, and allied health providers.",
+    description: "Guides for physicians, therapists, nurse practitioners, dietitians, chiropractors, and telehealth providers.",
   },
 
   // CAQH & Identity
@@ -78,19 +72,25 @@ export const SECTIONS: Section[] = [
     slug: "commercial-payers",
     title: "Major Commercial Payers (Aetna, BCBS, Cigna, UHC)",
     category: "health-plans-payers",
-    description: "Network participation criteria, enrollment applications, and contracting timelines.",
+    description: "Network participation criteria, Availity enrollment applications, and contracting timelines.",
   },
   {
     slug: "government-payers",
     title: "Medicare & Medicaid Provider Enrollment",
     category: "health-plans-payers",
-    description: "PECOS registration, CMS-855I forms, Medicare Advantage, and state Medicaid rosters.",
+    description: "PECOS registration, CMS-855I forms, Medicare Advantage, TRICARE, and state Medicaid rosters.",
   },
   {
     slug: "specialty-payers",
     title: "Regional & Behavioral Health Networks",
     category: "health-plans-payers",
     description: "Centene, Molina, Humana, Kaiser Permanente, and specialized mental health panels.",
+  },
+  {
+    slug: "uk-health-plans",
+    title: "UK Private Health Plans & Recognition",
+    category: "health-plans-payers",
+    description: "Registration and recognition guides for Bupa, AXA Health, Aviva, Vitality, and UK private insurers.",
   },
 
   // Practice Compliance & FAQs
@@ -99,12 +99,6 @@ export const SECTIONS: Section[] = [
     title: "Practice Locations, W-9 & Tax ID (TIN)",
     category: "practice-compliance",
     description: "Matching W-9 legal names with IRS records, physical vs telehealth service locations.",
-  },
-  {
-    slug: "supervisory-billing",
-    title: "Supervisory Billing & Associate Clinicians",
-    category: "practice-compliance",
-    description: "Rules for pre-licensed clinicians, supervisor oversight, and incident-to billing.",
   },
   {
     slug: "cvo-automation",
