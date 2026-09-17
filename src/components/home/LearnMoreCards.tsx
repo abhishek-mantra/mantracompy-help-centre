@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router";
-import { Video, Sparkles, Users, ArrowRight } from "lucide-react";
+import { Video, Sparkles, FileText, ArrowRight } from "lucide-react";
 
 export function LearnMoreCards() {
   const cards = [
@@ -17,19 +17,19 @@ export function LearnMoreCards() {
       title: "AI verification & CVO masterclass",
       description: "See how automated primary source verification cross-checks state boards, OIG exclusions, and DEA registries to achieve 95% first-time approval.",
       icon: Sparkles,
-      link: "/articles/caqh-authorization-and-cvo-access",
+      link: "/articles/ai-verification-and-cvo-masterclass",
       actionText: "Explore AI credentialing",
       badgeColor: "bg-cyan-100 text-[#008cb8]",
       isInternal: true,
     },
     {
-      title: "MantraComply Provider Community",
-      description: "Connect with credentialing specialists, billing managers, and healthcare compliance directors to share payer enrollment best practices.",
-      icon: Users,
-      link: "mailto:contact@mantracomply.com",
-      actionText: "Join community",
+      title: "12-step wizard walkthrough",
+      description: "Complete step-by-step breakdown of the provider credentialing wizard, document checklist, and post-submission CVO audit milestones.",
+      icon: FileText,
+      link: "/articles/mantracomply-wizard-walkthrough",
+      actionText: "View wizard walkthrough",
       badgeColor: "bg-emerald-100 text-emerald-800",
-      isInternal: false,
+      isInternal: true,
     },
   ];
 

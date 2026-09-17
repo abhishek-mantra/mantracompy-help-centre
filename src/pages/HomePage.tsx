@@ -64,6 +64,7 @@ export function HomePage() {
   // Key promoted guides for daily credentialing operations
   const promotedArticles = [
     ARTICLE_REGISTRY.find((a) => a.slug === "mantracomply-wizard-walkthrough"),
+    ARTICLE_REGISTRY.find((a) => a.slug === "ai-verification-and-cvo-masterclass"),
     ARTICLE_REGISTRY.find((a) => a.slug === "why-npi-is-needed-and-how-to-find-it"),
     ARTICLE_REGISTRY.find((a) => a.slug === "caqh-authorization-and-cvo-access"),
     ARTICLE_REGISTRY.find((a) => a.slug === "tracking-active-insurance-status"),
