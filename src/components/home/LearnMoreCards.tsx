@@ -5,31 +5,31 @@ import { Video, Sparkles, FileText, ArrowRight } from "lucide-react";
 export function LearnMoreCards() {
   const cards = [
     {
-      title: "Interactive credentialing tour",
-      description: "Explore the 12-step MantraComply onboarding wizard interactively. Watch the video walkthrough, preview form fields, and verify document requirements.",
+      title: "Interactive Credentialing Tour",
+      description: "Step through the 12-step onboarding wizard with live field validations.",
       icon: Video,
       link: "/tour",
       actionText: "Launch interactive tour",
-      badgeColor: "bg-blue-100 text-[#043570]",
-      isInternal: true,
+      iconColor: "text-blue-600",
+      iconBg: "bg-blue-50 border-blue-100",
     },
     {
-      title: "AI verification & CVO masterclass",
-      description: "See how automated primary source verification cross-checks state boards, OIG exclusions, and DEA registries to achieve 95% first-time approval.",
+      title: "AI Verification & CVO Masterclass",
+      description: "How automated primary source checks verify state boards & OIG for 95% approval.",
       icon: Sparkles,
       link: "/articles/ai-verification-and-cvo-masterclass",
-      actionText: "Explore AI credentialing",
-      badgeColor: "bg-cyan-100 text-[#008cb8]",
-      isInternal: true,
+      actionText: "Read CVO masterclass",
+      iconColor: "text-cyan-600",
+      iconBg: "bg-cyan-50 border-cyan-100",
     },
     {
-      title: "12-step wizard walkthrough",
-      description: "Complete step-by-step breakdown of the provider credentialing wizard, document checklist, and post-submission CVO audit milestones.",
+      title: "12-Step Wizard Walkthrough",
+      description: "Complete checklist of required forms, document uploads, and audit milestones.",
       icon: FileText,
       link: "/articles/mantracomply-wizard-walkthrough",
-      actionText: "View wizard walkthrough",
-      badgeColor: "bg-emerald-100 text-emerald-800",
-      isInternal: true,
+      actionText: "View wizard guide",
+      iconColor: "text-emerald-700",
+      iconBg: "bg-emerald-50 border-emerald-100",
     },
   ];
 
@@ -37,26 +37,32 @@ export function LearnMoreCards() {
     <section aria-labelledby="learn-more-heading" className="space-y-6">
       <div className="text-center space-y-1">
         <h2 id="learn-more-heading" className="text-2xl sm:text-3xl font-extrabold text-[#043570] tracking-tight">
-          Learn more
+          Featured Guides &amp; Walkthroughs
         </h2>
-        <p className="text-xs sm:text-sm text-slate-500 max-w-lg mx-auto">
-          Deep-dive into provider credentialing walkthroughs, automated CVO verifications, and compliance resources.
+        <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto">
+          Explore interactive demos, automated verification guides, and compliance checklists.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {cards.map((card, idx) => {
           const Icon = card.icon;
-          const content = (
-            <div className="bg-white rounded-3xl border border-slate-200/90 p-7 shadow-2xs hover:shadow-md hover:border-[#00c0ff] transition-all flex flex-col justify-between space-y-6 h-full group">
-              <div className="space-y-4">
-                <div className={`size-14 rounded-2xl ${card.badgeColor} flex items-center justify-center group-hover:scale-105 transition-transform`}>
-                  <Icon className="size-7" />
+          return (
+            <Link
+              key={idx}
+              to={card.link}
+              className="bg-white rounded-2xl border border-slate-200/90 p-6 shadow-2xs hover:shadow-md hover:border-[#00c0ff] transition-all flex flex-col justify-between space-y-5 group"
+            >
+              <div className="space-y-3">
+                <div
+                  className={`size-11 rounded-xl border ${card.iconBg} ${card.iconColor} flex items-center justify-center transition-transform group-hover:scale-105 shadow-2xs`}
+                >
+                  <Icon className="size-5.5" />
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 group-hover:text-[#043570] transition-colors leading-snug">
+                <h3 className="text-base font-bold text-slate-900 group-hover:text-[#043570] transition-colors leading-snug">
                   {card.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                <p className="text-xs text-slate-500 leading-relaxed">
                   {card.description}
                 </p>
               </div>
@@ -65,17 +71,7 @@ export function LearnMoreCards() {
                 <span>{card.actionText}</span>
                 <ArrowRight className="size-3.5 group-hover:translate-x-1 transition-transform" />
               </div>
-            </div>
-          );
-
-          return card.isInternal ? (
-            <Link key={idx} to={card.link} className="block h-full">
-              {content}
             </Link>
-          ) : (
-            <a key={idx} href={card.link} className="block h-full">
-              {content}
-            </a>
           );
         })}
       </div>
