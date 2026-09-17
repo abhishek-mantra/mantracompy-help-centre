@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router";
 
+import { Sparkles } from "lucide-react";
+
 export function Header() {
   return (
     <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-2xs">
@@ -23,6 +25,14 @@ export function Header() {
 
           {/* Clean Right Actions */}
           <div className="flex items-center gap-4 sm:gap-6 text-xs sm:text-sm font-semibold">
+            <Link
+              to="/tour"
+              className="text-[#008cb8] hover:text-[#043570] transition-colors hidden sm:inline-flex items-center gap-1.5 font-bold"
+            >
+              <Sparkles className="size-3.5" />
+              <span>Interactive Tour</span>
+            </Link>
+
             <a
               href="mailto:contact@mantracomply.com"
               className="text-slate-600 hover:text-[#043570] transition-colors hidden sm:inline-flex items-center gap-1"

@@ -2,6 +2,118 @@ import { Article } from "../types/helpCenter";
 
 export const ARTICLES: Article[] = [
   {
+    "slug": "mantracomply-wizard-walkthrough",
+    "title": "MantraComply Provider Credentialing Wizard: The Complete 12-Step Walkthrough",
+    "category": "getting-started-npi",
+    "section": "onboarding-process",
+    "summary": "The definitive, end-to-end guide to the 12-step MantraComply Provider Credentialing Wizard. Watch the video walkthrough, review required documents, and explore every step from NPI to electronic release.",
+    "readTime": "8 min read",
+    "lastUpdated": "September 2026",
+    "searchKeywords": [
+      "wizard",
+      "walkthrough",
+      "credentialing",
+      "onboarding",
+      "12 steps",
+      "tour",
+      "video",
+      "provider setup",
+      "cvo"
+    ],
+    "formStepTarget": "wizard-overview",
+    "toc": [
+      {
+        "id": "video-walkthrough",
+        "text": "Video Walkthrough & Introduction",
+        "level": 2
+      },
+      {
+        "id": "wizard-structure",
+        "text": "The 12 Credentialing Steps at a Glance",
+        "level": 2
+      },
+      {
+        "id": "step-1-npi",
+        "text": "Step 1: National Provider Identifier (NPI)",
+        "level": 3
+      },
+      {
+        "id": "step-2-caqh-auth",
+        "text": "Step 2: CAQH Authorization",
+        "level": 3
+      },
+      {
+        "id": "step-3-caqh-updates",
+        "text": "Step 3: CAQH Account Updates",
+        "level": 3
+      },
+      {
+        "id": "step-4-personal-info",
+        "text": "Step 4: Personal Information",
+        "level": 3
+      },
+      {
+        "id": "step-5-license-info",
+        "text": "Step 5: State Medical License & DEA",
+        "level": 3
+      },
+      {
+        "id": "step-6-board-certification",
+        "text": "Step 6: Board Certification",
+        "level": 3
+      },
+      {
+        "id": "step-7-malpractice",
+        "text": "Step 7: Malpractice Insurance (COI)",
+        "level": 3
+      },
+      {
+        "id": "step-8-education",
+        "text": "Step 8: Education & Residencies",
+        "level": 3
+      },
+      {
+        "id": "step-9-employment",
+        "text": "Step 9: Employment History & CV Gaps",
+        "level": 3
+      },
+      {
+        "id": "step-10-practice-info",
+        "text": "Step 10: Practice Locations & Tax ID (W-9)",
+        "level": 3
+      },
+      {
+        "id": "step-11-insurance-payers",
+        "text": "Step 11: Payers, CMS I&A & Availity",
+        "level": 3
+      },
+      {
+        "id": "step-12-release-forms",
+        "text": "Step 12: Electronic Release & Attestation",
+        "level": 3
+      },
+      {
+        "id": "pre-flight-checklist",
+        "text": "Provider Pre-Submission Checklist",
+        "level": 2
+      },
+      {
+        "id": "cvo-verification",
+        "text": "What Happens After You Submit?",
+        "level": 2
+      }
+    ],
+    "relatedSlugs": [
+      "why-npi-is-needed-and-how-to-find-it",
+      "caqh-authorization-and-cvo-access",
+      "how-to-fill-out-caqh-in-2026",
+      "primary-source-verification-and-identity",
+      "state-medical-license-verification",
+      "malpractice-insurance-and-coi-requirements"
+    ],
+    "content": "\n## Video Walkthrough & Introduction\n\nWelcome to the **MantraComply Provider Credentialing Wizard**. Our onboarding wizard is built to streamline your enrollment across government payers (Medicare PECOS, Medicaid) and major commercial health plans (Blue Cross Blue Shield, Aetna, Cigna, UnitedHealthcare, Humana). \n\nWatch our comprehensive video walkthrough below to see how each step works in the MantraComply platform:\n\n<div style=\"position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 16px; margin: 24px 0; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);\">\n  <iframe src=\"https://www.youtube-nocookie.com/embed/G56-6s4mJd8\" title=\"MantraComply Credentialing Wizard Video Walkthrough\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen style=\"position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;\"></iframe>\n</div>\n\n> \ud83c\udf1f **Want a hands-on experience?** Launch our **[Interactive Credentialing Tour](/tour)** to step through simulated forms, preview required fields, and check pre-submission requirements step by step.\n\n---\n\n## The 12 Credentialing Steps at a Glance\n\nWhen you access **My Profile &gt; Credentialing** in MantraComply, your progress is tracked through 12 structured steps. Our Credentials Verification Organization (CVO) uses this data to prepare your complete provider dossier.\n\n### Step 1: National Provider Identifier (NPI)\n- **What it asks:** Your 10-digit Type 1 (Individual) NPI and primary taxonomy code.\n- **Why it matters:** Anchors your identity across NPPES, CAQH, state registries, and electronic claim clearinghouses.\n- [Read deep-dive guide &rarr;](/articles/why-npi-is-needed-and-how-to-find-it)\n\n### Step 2: CAQH Authorization\n- **What it asks:** Confirmation that you have authorized **MantraComply CVO** within your CAQH ProView account.\n- **Why it matters:** Enables our team to audit, upload certificates, and submit packets directly to 1,000+ participating health plans.\n- [Read deep-dive guide &rarr;](/articles/caqh-authorization-and-cvo-access)\n\n### Step 3: CAQH Account Updates\n- **What it asks:** Your active CAQH Provider ID and confirmation of your latest 120-day re-attestation.\n- **Why it matters:** Payers automatically drop applications if a CAQH profile has expired attestations or unverified document uploads.\n- [Read deep-dive guide &rarr;](/articles/how-to-fill-out-caqh-in-2026)\n\n### Step 4: Personal Information\n- **What it asks:** Full legal name matching Social Security records, Date of Birth, SSN/TIN, residential address, and citizenship or work visa status.\n- **Why it matters:** Primary source verification against federal OIG/SAM exclusion registries and state licensing boards requires exact identity matching.\n- [Read deep-dive guide &rarr;](/articles/primary-source-verification-and-identity)\n\n### Step 5: State Medical License & DEA\n- **What it asks:** Active state medical/clinical license number(s), expiration dates, DEA registration, and state Controlled Substance Certificates (CDS/CSR).\n- **Why it matters:** MantraComply performs real-time license lookups with state medical boards to confirm clean standing without disciplinary actions.\n- [Read deep-dive guide &rarr;](/articles/state-medical-license-verification)\n\n### Step 6: Board Certification\n- **What it asks:** Certifying board (e.g., ABMS, ABPN, AOA), specialty, certification date, and recertification cycle.\n- **Why it matters:** Required for Tier 1 specialist payer networks and hospital admitting privileges.\n- [Read deep-dive guide &rarr;](/articles/board-certification-and-payer-tiers)\n\n### Step 7: Malpractice Insurance (COI)\n- **What it asks:** Carrier name, policy number, effective/expiration dates, and limits (standard: $1,000,000 per occurrence / $3,000,000 aggregate).\n- **Why it matters:** Requires uploading a current Certificate of Insurance (COI). Claims-made policies must include retroactive dates.\n- [Read deep-dive guide &rarr;](/articles/malpractice-insurance-and-coi-requirements)\n\n### Step 8: Education & Residencies\n- **What it asks:** Medical/graduate school, graduation year, internship, ACGME/AOA residency, and specialty fellowships.\n- **Why it matters:** Primary source verification directly with National Student Clearinghouse and residency verification offices.\n- [Read deep-dive guide &rarr;](/articles/medical-education-and-residency-documentation)\n\n### Step 9: Employment History & CV Gaps\n- **What it asks:** Complete 5-year chronological work history with month/year dates and formal explanations for any practice gaps exceeding 30 days.\n- **Why it matters:** NCQA and URAC accreditation standards mandate that all CV timeline gaps must be formally attested by the clinician.\n- [Read deep-dive guide &rarr;](/articles/work-history-gaps-and-attestations)\n\n### Step 10: Practice Locations & Tax ID (W-9)\n- **What it asks:** Physical clinical office address (where patients are seen), billing address, Tax ID (EIN or SSN), and signed IRS Form W-9.\n- **Why it matters:** Payers verify physical addresses for provider directories under the federal No Surprises Act. P.O. Boxes are strictly prohibited for physical site locations.\n- [Read deep-dive guide &rarr;](/articles/practice-location-and-tax-id-rules)\n\n### Step 11: Payers, CMS I&A & Availity\n- **What it asks:** Target commercial health plans, Medicaid state rosters, Medicare PECOS status, and access to CMS I&A and Availity Essentials accounts.\n- **Why it matters:** CMS I&A surrogate delegation allows MantraComply to draft Medicare CMS-855 forms, and Availity enables direct commercial roster additions.\n- [Read CMS I&A guide &rarr;](/articles/cms-identity-and-access-ia-account-guide) | [Read Availity guide &rarr;](/articles/availity-essentials-account-guide)\n\n### Step 12: Electronic Release & Attestation\n- **What it asks:** 10 standard NCQA disclosure questions (license sanctions, malpractice claims history, hospital privilege revocations) and digital signature.\n- **Why it matters:** Grants legal authorization for MantraComply CVO to act as your credentialing agent and verify records with third-party verification sources.\n- [Read deep-dive guide &rarr;](/articles/background-checks-and-release-forms)\n\n---\n\n## Provider Pre-Submission Checklist\n\nBefore starting the MantraComply Credentialing Wizard, ensure you have the following digital documents ready:\n\n| Document | Format | Expiration & Validity Rules |\n|---|---|---|\n| **Driver's License or Passport** | Color PDF/JPG | Must be unexpired and clearly legible |\n| **State Medical/Clinical Licenses** | PDF | Must show active status with future expiration date |\n| **DEA Registration Certificate** | PDF | Must show current practice address |\n| **Certificate of Insurance (COI)** | PDF | $1M/$3M minimum limits, active coverage dates |\n| **IRS Form W-9** | Signed PDF | Must match legal business name on TIN registry |\n| **Curriculum Vitae (CV)** | PDF / DOCX | Month/year format, no unexplained 30+ day gaps |\n| **Board Certification Certificate** | PDF | Active or maintenance of certification (MOC) status |\n| **CAQH ProView Number & Login** | Text / Credentials | Attested within the past 120 days |\n\n---\n\n## What Happens After You Submit?\n\n1. **Initial CVO Audit (24-48 Hours):** A dedicated MantraComply credentialing coordinator reviews your packet for missing documents or discrepancies.\n2. **Primary Source Verification (1-2 Weeks):** Automated checks run across NPPES, state medical boards, OIG/SAM exclusions, NPDB, and AMA profiles.\n3. **Payer Dossier Transmission:** Complete, verified packets are submitted directly into payer portals (Availity, CAQH ProView, and Medicare PECOS).\n4. **Active Status Tracking:** You can track the status of each insurance panel under the **Active Insurance** tab in your MantraComply dashboard.\n"
+  },
+  {
     "slug": "why-npi-is-needed-and-how-to-find-it",
     "title": "Why Your National Provider Identifier (NPI) Is Needed",
     "category": "getting-started-npi",

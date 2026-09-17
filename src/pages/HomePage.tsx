@@ -29,7 +29,7 @@ export function HomePage() {
     },
     {
       title: "Provider wizard walkthrough",
-      href: "/articles/why-npi-is-needed-and-how-to-find-it",
+      href: "/articles/mantracomply-wizard-walkthrough",
     },
     {
       title: "CAQH ProView & 120-day attestations",

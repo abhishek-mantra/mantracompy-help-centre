@@ -6,10 +6,10 @@ export function LearnMoreCards() {
   const cards = [
     {
       title: "Interactive credentialing tour",
-      description: "Learn at your own pace with on-demand credentialing modules. Explore the 12-step provider onboarding, CAQH authorization, and license checks.",
+      description: "Explore the 12-step MantraComply onboarding wizard interactively. Watch the video walkthrough, preview form fields, and verify document requirements.",
       icon: Video,
-      link: "/articles/mantracomply-wizard-walkthrough",
-      actionText: "Read walkthrough guide",
+      link: "/tour",
+      actionText: "Launch interactive tour",
       badgeColor: "bg-blue-100 text-[#043570]",
       isInternal: true,
     },

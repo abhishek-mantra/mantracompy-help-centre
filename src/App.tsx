@@ -7,6 +7,7 @@ import { HomePage } from "./pages/HomePage";
 import { CategoryPage } from "./pages/CategoryPage";
 import { ArticlePage } from "./pages/ArticlePage";
 import { SearchPage } from "./pages/SearchPage";
+import { CredentialingTourPage } from "./pages/CredentialingTourPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 
 function ScrollToTop() {
@@ -29,6 +30,8 @@ export function App() {
         <div className="flex-1">
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/tour" element={<CredentialingTourPage />} />
+            <Route path="/credentialing-tour" element={<CredentialingTourPage />} />
             <Route path="/category/:slug" element={<CategoryPage />} />
             <Route path="/articles/:slug" element={<ArticlePage />} />
             <Route path="/search" element={<SearchPage />} />
