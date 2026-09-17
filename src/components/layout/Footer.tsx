@@ -34,12 +34,33 @@ export function Footer() {
             <ul className="space-y-2.5 text-xs">
               <li>
                 <a
-                  href="mailto:contact@mantracomply.com"
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@mantracomply.com&su=[General%20Inquiry]%20MantraComply%20Support"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-2 text-slate-300 hover:text-cyan-400 transition-colors"
+                  title="Opens Gmail compose pre-addressed to contact@mantracomply.com"
                 >
                   <Mail className="size-3.5 text-cyan-400 shrink-0" />
                   <span>contact@mantracomply.com</span>
                 </a>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => {
+                    const w = window as any;
+                    if (w.BX?.LiveChat?.openLiveChat) w.BX.LiveChat.openLiveChat();
+                    else if (w.b24SiteButton?.open) w.b24SiteButton.open();
+                    else {
+                      const el = document.querySelector('.b24-widget-button-openline_livechat, .b24-widget-button-wrapper, .b24-widget-button') as HTMLElement | null;
+                      if (el) el.click();
+                    }
+                  }}
+                  className="flex items-center gap-2 text-slate-300 hover:text-cyan-400 transition-colors cursor-pointer text-left"
+                >
+                  <span className="size-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+                  <span>Bitrix24 Live Chat</span>
+                </button>
               </li>
               <li>
                 <a
