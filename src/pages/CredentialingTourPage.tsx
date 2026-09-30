@@ -820,7 +820,7 @@ export function CredentialingTourPage() {
               <div className="aspect-video w-full rounded-2xl overflow-hidden shadow-sm border border-slate-200">
                 <iframe
                   className="w-full h-full"
-                  src="https://www.youtube-nocookie.com/embed/G56-6s4mJd8"
+                  src="https://www.youtube-nocookie.com/embed/t0VqqJO1HdE"
                   title="MantraComply Credentialing Wizard Video Walkthrough"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -855,7 +855,7 @@ export function CredentialingTourPage() {
             <div className="aspect-video w-full rounded-2xl overflow-hidden shadow-inner border border-slate-200">
               <iframe
                 className="w-full h-full"
-                src="https://www.youtube-nocookie.com/embed/G56-6s4mJd8?autoplay=1"
+                src="https://www.youtube-nocookie.com/embed/t0VqqJO1HdE?autoplay=1"
                 title="MantraComply Credentialing Wizard Video Walkthrough"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

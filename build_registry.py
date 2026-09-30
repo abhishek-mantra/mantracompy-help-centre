@@ -55,7 +55,7 @@ Welcome to the **MantraComply Provider Credentialing Wizard**. Our onboarding wi
 Watch our comprehensive video walkthrough below to see how each step works in the MantraComply platform:
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; border-radius: 16px; margin: 24px 0; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);">
-  <iframe src="https://www.youtube-nocookie.com/embed/G56-6s4mJd8" title="MantraComply Credentialing Wizard Video Walkthrough" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"></iframe>
+  <iframe src="https://www.youtube-nocookie.com/embed/t0VqqJO1HdE" title="MantraComply Credentialing Wizard Video Walkthrough" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"></iframe>
 </div>
 
 > 🌟 **Want a hands-on experience?** Launch our **[Interactive Credentialing Tour](/tour)** to step through simulated forms, preview required fields, and check pre-submission requirements step by step.
