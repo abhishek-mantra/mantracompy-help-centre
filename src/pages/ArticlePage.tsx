@@ -18,9 +18,7 @@ import {
   Share2,
   FolderOpen,
   ChevronRight,
-  ExternalLink,
   BookOpen,
-  Sparkles,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -247,26 +245,6 @@ export function ArticlePage() {
               </div>
             </header>
 
-            {/* Form Wizard Link Banner if targeted */}
-            {article.formStepTarget && (
-              <div className="bg-blue-50/70 border border-blue-200 rounded-2xl p-4 flex items-center justify-between gap-4 text-xs shadow-2xs">
-                <div className="flex items-center gap-2 text-slate-700">
-                  <Sparkles className="size-4 text-[#00c0ff] shrink-0" />
-                  <span>
-                    Completing this step in the MantraComply Credentialing Wizard? Click to return to your form.
-                  </span>
-                </div>
-                <a
-                  href="https://mantra-comply.vercel.app/provider/credentialing"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#043570] hover:bg-[#032a57] text-white font-semibold whitespace-nowrap shadow-2xs transition-colors"
-                >
-                  <span>Open Form</span>
-                  <ExternalLink className="size-3" />
-                </a>
-              </div>
-            )}
 
             {/* Article Body Prose */}
             <article
