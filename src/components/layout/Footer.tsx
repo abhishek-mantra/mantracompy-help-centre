@@ -49,17 +49,9 @@ export function Footer() {
                   type="button"
                   onClick={() => {
                     const w = window as any;
-                    if (w.__mantraChatRoot) {
-                      const launcher = w.__mantraChatRoot.querySelector('.launcher') as HTMLElement | null;
-                      const wrap = w.__mantraChatRoot.querySelector('.wrap') as HTMLElement | null;
-                      if (launcher && !wrap?.classList.contains('open')) {
-                        launcher.click();
-                      }
-                    } else if (w.BX?.LiveChat?.openLiveChat) {
-                      w.BX.LiveChat.openLiveChat();
-                    } else if (w.b24SiteButton?.open) {
-                      w.b24SiteButton.open();
-                    } else {
+                    if (w.BX?.LiveChat?.openLiveChat) w.BX.LiveChat.openLiveChat();
+                    else if (w.b24SiteButton?.open) w.b24SiteButton.open();
+                    else {
                       const el = document.querySelector('.b24-widget-button-openline_livechat, .b24-widget-button-wrapper, .b24-widget-button') as HTMLElement | null;
                       if (el) el.click();
                     }
@@ -67,7 +59,7 @@ export function Footer() {
                   className="flex items-center gap-2 text-slate-300 hover:text-cyan-400 transition-colors cursor-pointer text-left"
                 >
                   <span className="size-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
-                  <span>Live Support Chat</span>
+                  <span>Bitrix24 Live Chat</span>
                 </button>
               </li>
               <li>

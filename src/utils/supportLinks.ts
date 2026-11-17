@@ -54,25 +54,13 @@ export function openGmailCompose(params: EmailParams = {}): void {
 }
 
 /**
- * Programmatically triggers the Live Chat window (MantraAssist / Bitrix24 fallback)
+ * Programmatically triggers the Bitrix24 Live Chat window
  */
-export function openLiveChat(): boolean {
+export function openBitrix24LiveChat(): boolean {
   try {
     const w = window as any;
 
-    // 1. MantraAssist Website Chat
-    if (w.__mantraChatRoot) {
-      const launcher = w.__mantraChatRoot.querySelector('.launcher') as HTMLElement | null;
-      const wrap = w.__mantraChatRoot.querySelector('.wrap') as HTMLElement | null;
-      if (launcher) {
-        if (!wrap?.classList.contains('open')) {
-          launcher.click();
-        }
-        return true;
-      }
-    }
-
-    // 2. Bitrix24 LiveChat native API fallback
+    // 1. Bitrix24 LiveChat native API
     if (w.BX?.LiveChat?.openLiveChat && typeof w.BX.LiveChat.openLiveChat === "function") {
       w.BX.LiveChat.openLiveChat();
       return true;
@@ -82,7 +70,7 @@ export function openLiveChat(): boolean {
       return true;
     }
 
-    // 3. Bitrix24 Site Button API fallback
+    // 2. Bitrix24 Site Button API
     if (w.b24SiteButton && typeof w.b24SiteButton.open === "function") {
       w.b24SiteButton.open();
       return true;
@@ -92,7 +80,7 @@ export function openLiveChat(): boolean {
       return true;
     }
 
-    // 4. Fallback: DOM query and click
+    // 3. Fallback: DOM query and click
     const selectors = [
       ".b24-widget-button-openline_livechat",
       ".b24-widget-button-wrapper",
@@ -110,17 +98,23 @@ export function openLiveChat(): boolean {
       }
     }
 
+    console.warn("Bitrix24 widget element not found in DOM yet. Retrying in 400ms...");
+    setTimeout(() => {
+      for (const sel of selectors) {
+        const el = document.querySelector(sel) as HTMLElement | null;
+        if (el) {
+          el.click();
+          return;
+        }
+      }
+    }, 400);
+
     return false;
   } catch (err) {
-    console.error("Failed to trigger Live Chat:", err);
+    console.error("Failed to trigger Bitrix24 LiveChat:", err);
     return false;
   }
 }
-
-/**
- * Backward compatibility alias for openLiveChat
- */
-export const openBitrix24LiveChat = openLiveChat;
 
 /**
  * Pre-formatted email templates for each support stream
